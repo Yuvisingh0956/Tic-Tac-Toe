@@ -54,11 +54,7 @@ boxes.forEach((box) => {
         }
         box.disabled = true;
 
-        if(count == 9) {
-            showWinner("Draw");
-        } else{
-            checkWinner();
-        }
+        checkWinner();
         console.log(count);
     });
 });
@@ -77,6 +73,7 @@ const enableBoxes = () => {
 }
 
 const checkWinner= () => {
+    let res = false;
     for(let pattern of winPatterns){
         let pos1Val = boxes[pattern[0]].innerText;
         let pos2Val = boxes[pattern[1]].innerText;
@@ -86,8 +83,12 @@ const checkWinner= () => {
             if(pos1Val === pos2Val && pos2Val === pos3Val){
                 console.log("winner", pos1Val);
                 showWinner(pos1Val);
+                res = true;
             }
         }
+    }
+    if(count == 9 && !res){
+        showWinner("Draw");
     }
 }
 
